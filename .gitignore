@@ -1,0 +1,35 @@
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores e IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Arquivos locais e temporários
+.env
+*.log
+*.tmp
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Dependências Node.js
+node_modules/
+
+# Arquivos compilados e de build
+bin/
+obj/
+build/
+dist/
+target/
+
+# Banco de dados local
+*.db
+*.sqlite3
