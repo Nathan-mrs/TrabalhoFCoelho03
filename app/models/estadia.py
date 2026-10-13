@@ -14,6 +14,11 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base
 
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from app.models.veiculo import Veiculo
+
 
 def agora_utc_sem_fuso() -> datetime:
     # O SQLite guarda o horário sem fuso; neste projeto, trataremos esse
