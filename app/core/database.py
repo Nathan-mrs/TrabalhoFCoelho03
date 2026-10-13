@@ -1,13 +1,15 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, DeclarativaBase
+from sqlalchemy.orm import sessionmaker, DeclarativeBase
 
-Database_URL = "sqlite:///./app/core/estacionamento.db"
+DATABASE_URL = "sqlite:///./estacionamento.db"
 
-engine = create_engine(Database_URL, connect_args={"check_same_thread": False})
+engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 
-class Base(DeclaritiveBase):
+
+class Base(DeclarativeBase):
     pass
+
 
 def get_db():
     db = SessionLocal()
@@ -15,5 +17,3 @@ def get_db():
         yield db
     finally:
         db.close()
-
-        
