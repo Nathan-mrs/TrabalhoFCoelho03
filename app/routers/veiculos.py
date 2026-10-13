@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.models.veiculo import Veiculo
 from app.schemas.veiculo import VeiculoCreate, VeiculoResponse, VeiculoUpdate
+from app.models.estadia import Estadia
 
 router = APIRouter(prefix="/veiculos", tags=["Veículos"])
 
@@ -55,6 +56,17 @@ def remover_veiculo(veiculo_id: int, db: Session = Depends(get_db)):
     veiculo = db.get(Veiculo, veiculo_id)
     if not veiculo:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Veículo não encontrado")
+
+    possui_estadias = (
+        db.query(Estadia.id)
+        .filter(Estadia.veiculo_id == veiculo_id)
+        .first()
+    )
+    if possui_estadias:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="Não é possível remover um veículo que possui estadias",
+        )
 
     db.delete(veiculo)
     db.commit()
